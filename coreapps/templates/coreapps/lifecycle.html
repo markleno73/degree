@@ -1,0 +1,73 @@
+{% extends 'coreapps/base.html' %}
+
+{% block top-left-elbow %}
+    <a href="#"></a>
+{% endblock %}
+
+{% block top-right-elbow %}
+    <a href="#"></a>
+{% endblock %}
+
+{% block left %}
+    <ul class="lcars-menu">
+        <li class="lcars-blue-bg"><a href="{% url 'coreapps:places_home' %}">places</a> </li>
+        <li class="lcars-tan-bg"><a href="{% url 'coreapps:departments_home' %}">departments</a></li>
+        <li class="lcars-tan-bg tall"><a href="{% url 'coreapps:companies_home' %}">companies</a></li>
+        <li class="lcars-tan-bg"><a href="{% url 'coreapps:things_home' %}">things</a></li>
+        <li class="lcars-tan-bg"><a href="{% url 'coreapps:kb_home' %}">kb</a></li>
+        <li class="lcars-tan-bg"><a href="{% url 'coreapps:notes_home' %}">notes</a></li>
+        <li class="lcars-tan-bg"><a href="{% url 'coreapps:links_home' %}">links</a></li>
+        <li class="lcars-tan-bg"><a href="{% url 'coreapps:groups_home' %}">groups</a></li>
+    </ul>
+{% endblock %}
+
+{% block center %}
+    <div class="lcars-row">
+    {% block center-row %}
+        <div class="lcars-column u-1-2">
+        {% block center-row-1-2 %}
+            <a href="#" class="lcars-button radius">Button 1</a>
+        {% endblock %}
+            {% if message %}
+                <ul>
+                    <li><a href="">{{ message }}</a></li>
+                </ul>
+            {% else %}
+                <p>No polls are available.</p>
+            {% endif %}
+        </div>
+        <div class="lcars-column u-1-2">
+        {% block center-row-2-2 %}
+            <a href="#" class="lcars-button radius">Button 2</a>
+        {% endblock %}
+        </div>
+    {% endblock %}
+    </div>
+{% endblock %}
+
+{% block right %}
+    <ul class="lcars-menu right">
+        <li class="lcars-tan-bg"><a href="#">Testing</a></li>
+        <li class="lcars-tan-bg tall large-gap">Testing Large</li>
+        <li class="lcars-blue-bg">Testing 2</li>
+        <li class="lcars-blue-bg tall">Testing Large 2</li>
+        <li class="lcars-blue-bg">Testing 3</li>
+    </ul>
+{% endblock %}
+
+{% block bottom-left-elbow %}
+    <a href="#">Side Button 3</a>
+{% endblock %}
+
+{% block bottom %}
+    <div class="lcars-column u-1-2">
+        <a href="#" class="lcars-button radius">Button 1</a>
+    </div>
+    <div class="lcars-column u-1-2">
+        <a href="#" class="lcars-button radius">Button 2</a>
+    </div>
+{% endblock %}
+
+{% block bottom-right-elbow %}
+    <a href="#">Side Button 4</a>
+{% endblock %}

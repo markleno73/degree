@@ -1,0 +1,142 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>LCARS</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'coreapps/css/lcars.css' %}" />
+  <style>
+  html, body { background: black }
+  </style>
+</head>
+<body>
+
+  <div class="lcars-container">
+
+    <!-- TOP ROW
+    =========================================================== -->
+    <div class="lcars-row spaced">
+
+      <!-- TOP LEFT ELBOW
+      =========================================================== -->
+      <div class="lcars-column u-1-8 lcars-elbow left bottom lcars-blue-bg">
+        {% block top-left-elbow %}<a href="#"></a>{% endblock %}
+      </div>
+
+      <!-- TOP DIVIDER AND BUTTONS
+      =========================================================== -->
+      <div class="lcars-column u-6-8 lcars-divider lcars-blue-tan-divide">
+        <div class="lcars-row">
+          <div class="lcars-column u-1-2">
+            <a href="{% url 'coreapps:index' %}" class="lcars-button radius">
+              Core Apps
+              <span class="lcars-button-addition">A1</span>
+            </a>
+          </div>
+          <div class="lcars-column u-1-2">
+            <h1 class="right">LENOS</h1>
+          </div>
+        </div>
+      </div>
+
+      <!-- TOP RIGHT ELBOW
+      =========================================================== -->
+      <div class="lcars-column u-1-8 lcars-elbow right bottom lcars-tan-bg">
+        {% block top-right-elbow %}{% endblock %}
+      </div>
+    </div>
+
+    <div class="lcars-row">
+
+      <!-- LEFT MENU
+      =========================================================== -->
+      <div class="lcars-column u-1-8">
+        {% block left %}
+          <ul class="lcars-menu">
+              <li class="lcars-blue-bg"><a href="{% url 'coreapps:places_home' %}">places</a> </li>
+              <li class="lcars-tan-bg"><a href="{% url 'coreapps:departments_home' %}">departments</a></li>
+              <li class="lcars-tan-bg tall"><a href="{% url 'coreapps:companies_home' %}">companies</a></li>
+              <li class="lcars-tan-bg"><a href="{% url 'coreapps:things_home' %}">things</a></li>
+              <li class="lcars-tan-bg"><a href="{% url 'coreapps:kbs_home' %}">kbs</a></li>
+              <li class="lcars-tan-bg"><a href="{% url 'coreapps:notes_home' %}">notes</a></li>
+              <li class="lcars-tan-bg"><a href="{% url 'coreapps:links_home' %}">links</a></li>
+              <li class="lcars-tan-bg"><a href="{% url 'coreapps:groups_home' %}">groups</a></li>
+          </ul>
+        {% endblock %}
+      </div>
+
+      <!-- CENTER SECTION
+      =========================================================== -->
+      <div class="lcars-column u-6-8">
+        {% block center %}
+        <div class="lcars-row">
+          {% block center-row %}
+          <div class="lcars-column u-1-3">
+            {% block center-row-1-2 %}
+            {% endblock %}
+          </div>
+          <div class="lcars-column u-1-2">
+            {% block center-row-2-2 %}
+            {% endblock %}
+          </div>
+          {% endblock %}
+        </div>
+        {% endblock %}
+      </div>
+
+      <!-- RIGHT MENU
+      =========================================================== -->
+      <div class="lcars-column u-1-8">
+        {% block right %}
+        <ul class="lcars-menu right">
+          <li class="lcars-tan-bg"><a href="#"></a></li>
+          <li class="lcars-tan-bg tall large-gap"></li>
+          <li class="lcars-blue-bg"></li>
+          <li class="lcars-blue-bg tall"></li>
+          <li class="lcars-blue-bg"></li>
+        </ul>
+        {% endblock %}
+      </div>
+    </div>
+
+    <!-- BOTTOM ROW
+    =========================================================== -->
+    <div class="lcars-row spaced">
+
+      <!-- BOTTOM LEFT ELBOW
+      =========================================================== -->
+      <div class="lcars-column u-1-8 lcars-elbow left top lcars-tan-bg">
+        {% block bottom-left-elbow %}
+        <a href="#"></a>
+        {% endblock %}
+      </div>
+
+      <!-- BOTTOM DIVIDER AND BUTTONS
+      =========================================================== -->
+      <div class="lcars-column u-6-8 lcars-divider bottom lcars-tan-blue-divide">
+        <div class="lcars-row">
+          {% block bottom %}
+          <div class="lcars-column u-1-2">
+            <a href="#" class="lcars-button radius"></a>
+          </div>
+          <div class="lcars-column u-1-2">
+            <a href="#" class="lcars-button radius"></a>
+          </div>
+          {% endblock %}
+        </div>
+      </div>
+
+      <!-- BOTTOM RIGHT ELBOW
+      =========================================================== -->
+      <div class="lcars-column u-1-8 lcars-elbow right top lcars-blue-bg">
+        {% block bottom-right-elbow %}
+        <a href="#"></a>
+        {% endblock %}
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

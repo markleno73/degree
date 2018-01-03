@@ -1,0 +1,24 @@
+{% extends 'coreapps/department.html' %}
+
+{% block center %}
+    <div class="lcars-row">
+    {% block center-row %}
+        <div class="lcars-column u-1-2">
+        {% block center-row-1-2 %}
+            <a href="#" class="lcars-button radius">-</a>
+        {% endblock %}
+        </div>
+        <div class="lcars-column u-1-2">
+        {% block center-row-2-2 %}
+            <a href="#" class="lcars-button radius">Details of the department</a>
+            {% if department %}
+                <ul>
+                    <li><a href="" class="lcars-white-color">{{ department.name }}</a></li>
+                    <li><a href="" class="lcars-white-color">{{ department.place }}</a></li>
+                </ul>
+            {% endif %}
+        {% endblock %}
+        </div>
+    {% endblock %}
+    </div>
+{% endblock %}

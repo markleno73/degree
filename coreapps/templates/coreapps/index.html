@@ -1,0 +1,71 @@
+{% extends 'coreapps/base.html' %}
+
+{% block center %}
+    <div class="lcars-row">
+    {% block center-row %}
+        <div class="lcars-column u-1-2">
+        {% block center-row-1-2 %}
+            <a href="#" class="lcars-button radius">-</a>
+            <table>
+              <tr><td>Get the jira rest interface thing working again.</td></tr>
+              <tr><td>Get the service now interface running.</td></tr>
+              <tr><td>I need an interface to start inputing changes to the models with.</td></tr>
+              <tr><td>&nbsp&nbsp&nbspYou should start with the links I think</td></tr>
+            </table>
+            <div class="lcars-row">This is a lcars row</div>
+            <div class="lcars-row before">This is a lcars row</div>
+            <div class="lcars-row">This is a lcars row</div>
+            <div class="lcars-row">This is a lcars row</div>
+        {% endblock %}
+{% if message %}
+    <ul>
+        <li><a href="">{{ message }}</a></li>
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+        </div>
+        <div class="lcars-column u-1-2">
+        {% block center-row-2-2 %}
+            <a href="#" class="lcars-button radius">-</a>
+            <br/><p>The heavens themselves, the planets and this centre
+            earth, Observe degree, priority and place,
+            Insisture, course, proportion, season, form,
+                Office and custom, in all line of order;</p>
+
+            <br/><p>But when the planets in evil mixture to disorder wander,</p>
+
+            <br/><p>What plagues and what portents! what mutiny!
+            What raging of the sea! shaking of earth!
+            Commotion in the winds! frights, changes, horrors,
+            Divert and crack, rend and deracinate
+            The unity and married calm of states
+                Quite from their fixure!</p>
+
+            <br/><p>O, when degree is shaked,
+            Which is the ladder to all high designs,
+                Then enterprise is sick!</p>
+
+            <br/><p>How could communities,
+            Degrees in schools and brotherhoods in cities,
+            Peaceful commerce from dividable shores,
+            The primogenitive and due of birth,
+            Prerogative of age, crowns, sceptres, laurels,
+            But by degree, stand in authentic place?
+            Take but degree away, untune that string,
+            And, hark, what discord follows!</p>
+        {% endblock %}
+        </div>
+    {% endblock %}
+    </div>
+{% endblock %}
+
+{% block right %}
+    <ul class="lcars-menu right">
+        <li class="lcars-tan-bg"><a href="#"></a></li>
+        <li class="lcars-tan-bg tall large-gap"></li>
+        <li class="lcars-blue-bg"></li>
+        <li class="lcars-blue-bg tall"></li>
+        <li class="lcars-blue-bg"></li>
+    </ul>
+{% endblock %}

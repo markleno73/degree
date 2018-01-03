@@ -1,0 +1,38 @@
+{% extends 'coreapps/base.html' %}
+
+{% block center %}
+    <div class="lcars-row">
+    {% block center-row %}
+        <div class="lcars-column u-1-2">
+        {% block center-row-1-2 %}
+            <a href="#" class="lcars-button radius">-</a>
+        {% endblock %}
+            {% if message %}
+                <ul>
+                    <li><a href="">{{ message }}</a></li>
+                    {% for thing in all_things %}
+                        <li><a href="/coreapps/thing/{{ thing.id }}/detail" class="lcars-white-color">{{ thing }}</a></li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No polls are available.</p>
+            {% endif %}
+        </div>
+        <div class="lcars-column u-1-2">
+        {% block center-row-2-2 %}
+            <a href="#" class="lcars-button radius">-</a>
+        {% endblock %}
+        </div>
+    {% endblock %}
+    </div>
+{% endblock %}
+
+{% block right %}
+    <ul class="lcars-menu right">
+        <li class="lcars-tan-bg"><a href="{% url 'coreapps:thing_form' %}">new</a></li>
+        <li class="lcars-tan-bg tall large-gap"></li>
+        <li class="lcars-blue-bg"></li>
+        <li class="lcars-blue-bg tall"></li>
+        <li class="lcars-blue-bg"></li>
+    </ul>
+{% endblock %}

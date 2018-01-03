@@ -1,0 +1,32 @@
+{% extends 'coreapps/link.html' %}
+
+{% block center %}
+    <div class="lcars-row">
+    {% block center-row %}
+        <div class="lcars-column u-1-2">
+        {% block center-row-1-2 %}
+            <a href="#" class="lcars-button radius">-</a>
+        {% endblock %}
+            {% if message %}
+                <ul>
+                    <li><a href="" class="lcars-color white">{{ message }}</a></li>
+                </ul>
+            {% else %}
+                <p>No polls are available.</p>
+            {% endif %}
+        </div>
+        <div class="lcars-column u-1-2">
+        {% block center-row-2-2 %}
+            <a href="#" class="lcars-button radius">Enter the details of the new link</a>
+            <form action="/coreapps/link_form/" method="post" enctype="multipart/form-data">
+                <table>
+                {% csrf_token %}
+                {{ link_form_data }}
+                </table>
+                <input type="submit" value="Submit"/>
+            </form>
+        {% endblock %}
+        </div>
+    {% endblock %}
+    </div>
+{% endblock %}

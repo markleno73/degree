@@ -1,0 +1,34 @@
+{% extends 'coreapps/place.html' %}
+
+{% block center %}
+    <div class="lcars-row">
+    {% block center-row %}
+        <div class="lcars-column u-1-2">
+        {% block center-row-1-2 %}
+            <a href="#" class="lcars-button radius">-</a>
+            {% if place %}
+                <ul>
+                    <li><a href="" class="lcars-white-color">{{ place }}</a></li>
+                </ul>
+            {% endif %}
+        {% endblock %}
+        </div>
+        <div class="lcars-column u-1-2">
+        {% block center-row-2-2 %}
+            <a href="#" class="lcars-button radius">Details of the place</a>
+            {% if place %}
+                <ul>
+                    <li><a href="" class="lcars-white-color">{{ place.name }}</a></li>
+                    <li><a href="" class="lcars-white-color">{{ place.number }}</a></li>
+                    <li><a href="" class="lcars-white-color">{{ place.address_line1 }}</a></li>
+                    <li><a href="" class="lcars-white-color">{{ place.address_line2 }}</a></li>
+                    <li><a href="" class="lcars-white-color">{{ place.city }}</a></li>
+                    <li><a href="" class="lcars-white-color">{{ place.state }}</a></li>
+                    <li><a href="" class="lcars-white-color">{{ place.zip }}</a></li>
+                </ul>
+            {% endif %}
+        {% endblock %}
+        </div>
+    {% endblock %}
+    </div>
+{% endblock %}
