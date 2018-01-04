@@ -36,6 +36,11 @@
           </div>
           <div class="lcars-column u-1-2">
             <h1 class="right">LENOS</h1>
+            {% if user.is_authenticated %}
+              <small><a href="{% url 'logout' %}"><font color="white">logout</font></a></small>
+            {% else %}
+              <small><a href="{% url 'login' %}"><font color="white">login</font></a></small>
+            {% endif %}
           </div>
         </div>
       </div>
@@ -99,11 +104,9 @@
         {% endblock %}
       </div>
     </div>
-
     <!-- BOTTOM ROW
     =========================================================== -->
     <div class="lcars-row spaced">
-
       <!-- BOTTOM LEFT ELBOW
       =========================================================== -->
       <div class="lcars-column u-1-8 lcars-elbow left top lcars-tan-bg">

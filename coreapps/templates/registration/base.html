@@ -1,0 +1,21 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>LCARS</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'coreapps/css/lcars.css' %}" />
+  <style>
+  html, body { background: black }
+  </style>
+</head>
+<body>
+
+
+{% block title %}{% endblock %}
+<br/><br/><br/>
+{% block content %}{% endblock %}
+
+</body>
+</html>

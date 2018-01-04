@@ -46,6 +46,8 @@
 from django.conf.urls import url
 from . import views
 
+app_name = 'coreapps'
+
 urlpatterns = [
     # ex: /coreapps/
     url(r'^$', views.index, name='index'),

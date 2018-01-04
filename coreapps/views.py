@@ -501,7 +501,6 @@ def group_form(request, group_id=None):
                     # send_mail(subject, message, sender, recipients)
                     # redirect to a new URL:
                 return HttpResponseRedirect('/coreapps/groups/')
-
     else:
         if not group_id == None:
             this_group = Group.objects.get(pk=group_id)
