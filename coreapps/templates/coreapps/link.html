@@ -11,8 +11,15 @@
                 <ul>
                     <li><a href="">{{ message }}</a></li>
                     {% for link in all_links %}
-                        <li><a href="/coreapps/link/{{ link.id }}/detail" class="lcars-white-color">&Delta;</a>
-                            <a href="{{ link.urly }}" target="blank" class="lcars-white-color">{{ link }}</a> </li>
+                    <li>
+                        <form id="myform" method="post" action="{% url 'coreapps:link_form' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="task" value="edit">
+                            <input type="hidden" name="link_id" value="{{ link.id }}">
+                            <a href="#" onclick="myform.submit();return false;" class="lcars-white-color">&Delta;</a>
+                            <a href="{{ link.urly }}" target="blank" class="lcars-white-color">{{ link }}</a>
+                        </form>
+                    </li>
                     {% endfor %}
                 </ul>
             {% else %}

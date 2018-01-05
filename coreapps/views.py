@@ -394,7 +394,6 @@ def note_detail(request, note_id):
 def links_home(request):
     output = "these are the 'links' to click click clickity"
     all_links = Link.objects.all()
-    print(all_links)
     context = {
         'message': output,
         'all_links': all_links,
@@ -404,16 +403,26 @@ def links_home(request):
 
 def link_form(request):
     output = "new link page"
+    all_links = Link.objects.all()
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with the data from the request:
-        link_form_data = link_model_form(request.POST, request.FILES)
-        # check whether it's valid:
-        if link_form_data.is_valid():
-            # process the data in the form.cleaned_data as required.
-            # ...
-            link_form_data.save()
-            # examples are fun
+        print(request.POST)
+        if request.POST['task'] == 'delete':
+            this_link = Link.objects.get(id=request.POST['link_id'])
+            this_link.delete()
+        elif request.POST['task'] == 'edit':
+            this_link = Link.objects.get(id=request.POST['link_id'])
+            link_form_data = link_model_form(this_link)
+            return render(request, 'coreapps/link_form.html', context)
+        else:
+            link_form_data = link_model_form(request.POST, request.FILES)
+            # check whether it's valid:
+            if link_form_data.is_valid():
+                # process the data in the form.cleaned_data as required.
+                # ...
+                link_form_data.save()
+                # examples are fun
                 # subject = form.cleaned_data['subject']
                 # message = form.cleaned_data['message']
                 # sender = form.cleaned_data['sender']
@@ -424,13 +433,14 @@ def link_form(request):
                 #     recipients.append(sender)
                 #
                 # send_mail(subject, message, sender, recipients)
-            # redirect to a new URL:
-            return HttpResponseRedirect('/coreapps/links/')
+                # redirect to a new URL:
+        return HttpResponseRedirect('/coreapps/links/')
     else:
         link_form_data = link_model_form()
     context = {
         'message': output,
         'link_form_data': link_form_data,
+        'all_links': all_links,
     }
     return render(request, 'coreapps/link_form.html', context)
 
@@ -438,9 +448,14 @@ def link_form(request):
 def link_detail(request, link_id):
     try:
         this_link = Link.objects.get(pk=link_id)
+        all_links = Link.objects.all()
+        context = {
+            'all_links': all_links,
+            'link': this_link,
+        }
     except Link.DoesNotExist:
         raise Http404("Link does not exist")
-    return render(request, 'coreapps/link_detail.html', {'link': this_link})
+    return render(request, 'coreapps/link_detail.html', context)
 
 
 def groups_home(request):

@@ -10,6 +10,10 @@
             {% if message %}
                 <ul>
                     <li><a href="" class="lcars-color white">{{ message }}</a></li>
+                    {% for link in all_links %}
+                    <li><a href="/coreapps/link/{{ link.id }}/detail" class="lcars-white-color">&Delta;</a>
+                        <a href="{{ link.urly }}" target="blank" class="lcars-white-color">{{ link }}</a></li>
+                    {% endfor %}
                 </ul>
             {% else %}
                 <p>No polls are available.</p>
@@ -23,6 +27,7 @@
                 {% csrf_token %}
                 {{ link_form_data }}
                 </table>
+                <input type="hidden" name="task" value="add">
                 <input type="submit" value="Submit"/>
             </form>
         {% endblock %}
