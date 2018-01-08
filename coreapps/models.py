@@ -86,7 +86,7 @@ class Note(models.Model):
 
 
 # links
-class Link(models.Model):
+class Linker(models.Model):
     name = models.CharField(max_length=200)
     description = models.CharField(max_length=200)
     urly = models.CharField(max_length=1000)

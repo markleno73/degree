@@ -30,6 +30,15 @@
                 <input type="hidden" name="task" value="add">
                 <input type="submit" value="Submit"/>
             </form>
+            {% if link_id %}
+                <form id="myform" method="post" action="{% url 'coreapps:link_form' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="task" value="delete">
+                    <input type="hidden" name="link_id" value="{{ link_id }}" >
+                    <input type="submit" name="submit" value="Delete" />
+                    <a href="{{ link.urly }}" target="blank" class="lcars-white-color">{{ link }}</a>
+                </form>
+            {% endif %}
         {% endblock %}
         </div>
     {% endblock %}

@@ -32,7 +32,7 @@ class group_model_form(ModelForm):
 
 class link_model_form(ModelForm):
     class Meta:
-        model = Link
+        model = Linker
         fields = ['name','description','urly']
             # fields = '__all__'
             # exclude = ['title']

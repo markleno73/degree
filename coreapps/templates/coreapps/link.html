@@ -15,8 +15,16 @@
                         <form id="myform" method="post" action="{% url 'coreapps:link_form' %}">
                             {% csrf_token %}
                             <input type="hidden" name="task" value="edit">
-                            <input type="hidden" name="link_id" value="{{ link.id }}">
-                            <a href="#" onclick="myform.submit();return false;" class="lcars-white-color">&Delta;</a>
+                            <input type="hidden" name="link_id" value="{{ link.id }}" >
+                            <input type="submit" name="submit" value="&Delta;" style="
+                                 background:none!important;
+                                 color:inherit;
+                                 border:none;
+                                 padding:0!important;
+                                 font: inherit;
+                                 /*border is optional*/
+                                 border-bottom:1px solid #444;
+                                 cursor: pointer;" />
                             <a href="{{ link.urly }}" target="blank" class="lcars-white-color">{{ link }}</a>
                         </form>
                     </li>

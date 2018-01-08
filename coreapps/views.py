@@ -393,7 +393,7 @@ def note_detail(request, note_id):
 
 def links_home(request):
     output = "these are the 'links' to click click clickity"
-    all_links = Link.objects.all()
+    all_links = Linker.objects.all()
     context = {
         'message': output,
         'all_links': all_links,
@@ -403,17 +403,24 @@ def links_home(request):
 
 def link_form(request):
     output = "new link page"
-    all_links = Link.objects.all()
+    all_links = Linker.objects.all()
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with the data from the request:
         print(request.POST)
         if request.POST['task'] == 'delete':
-            this_link = Link.objects.get(id=request.POST['link_id'])
+            this_link = Linker.objects.get(pk = request.POST['link_id'])
             this_link.delete()
         elif request.POST['task'] == 'edit':
-            this_link = Link.objects.get(id=request.POST['link_id'])
-            link_form_data = link_model_form(this_link)
+            this_link = Linker.objects.get(pk = request.POST['link_id'])
+            link_id = request.POST['link_id']
+            link_form_data = link_model_form(instance=this_link)
+            context = {
+                'message': output,
+                'link_form_data': link_form_data,
+                'link_id': link_id,
+                'all_links': all_links,
+            }
             return render(request, 'coreapps/link_form.html', context)
         else:
             link_form_data = link_model_form(request.POST, request.FILES)
@@ -447,14 +454,14 @@ def link_form(request):
 
 def link_detail(request, link_id):
     try:
-        this_link = Link.objects.get(pk=link_id)
-        all_links = Link.objects.all()
+        this_link = Linker.objects.get(pk=link_id)
+        all_links = Linker.objects.all()
         context = {
             'all_links': all_links,
             'link': this_link,
         }
-    except Link.DoesNotExist:
-        raise Http404("Link does not exist")
+    except Linker.DoesNotExist:
+        raise Http404("Linker does not exist")
     return render(request, 'coreapps/link_detail.html', context)
 
 
