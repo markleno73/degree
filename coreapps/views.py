@@ -27,22 +27,26 @@ def places_home(request):
     return render(request, 'coreapps/place.html', context)
 
 
+def handle_uploaded_file(f):
+    with open('upload.csv', 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
+
+
 def places_import(request):
     output = "places import page"
     if request.method == 'POST':
         places_import_form_data = places_import_form(request.POST, request.FILES)
         if places_import_form_data.is_valid():
             # process the data in the form.cleaned_data as required.
-            print(request.FILES)
             # redirecto to a new URL:
             #return HttpResponseRedirect('/coreapps/places/')
             #try:
-            csv_file = request.FILES["file_path"]
-            print(csv_file)
-            paramFile = request.FILES['file_path']
-            portfolio = csv.DictReader(paramFile)
-            for row in portfolio:
-                print(row)
+            handle_uploaded_file(request.FILES["file_path"])
+            with open('upload.csv', 'r') as f:
+                reader = csv.reader(f)
+                for row in reader:
+                    print(row)
             #     if not csv_file.name.endswith('.csv'):
             #         messages.error(request,'File is not CSV type')
             #         return HttpResponseRedirect(reverse("myapp:upload_csv"))
