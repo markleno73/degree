@@ -10,7 +10,8 @@
                 <ul>
                     <li><a href="" class="lcars-white-color">{{ message }}</a></li>
                     {% for place in all_places %}
-                        <li><a href="/coreapps/place/{{ place.id }}/detail" class="lcars-white-color">{{ place }}</a></li>
+                    <li><a href="/coreapps/place/{{ place.id }}/detail" class="lcars-white-color">
+                        {{ place.number|stringformat:"04d" }} - {{ place }}</a></li>
                     {% endfor %}
                 </ul>
             {% else %}

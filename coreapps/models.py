@@ -6,7 +6,7 @@ from django.db import models
 # Place
 class Place(models.Model):
     name = models.CharField(max_length=200)
-    number = models.IntegerField(null=True, blank=True)
+    number = models.CharField(null=True, blank=True, max_length=4)
     # should be many to many with addresses
     address_line1 = models.CharField(max_length=200, verbose_name='Address Line 1', null=True, blank=True)
     address_line2 = models.CharField(max_length=200, verbose_name='Address Line 2', null=True, blank=True)

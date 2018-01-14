@@ -45,7 +45,29 @@ def places_import(request):
             handle_uploaded_file(request.FILES["file_path"])
             with open('upload.csv', 'r') as f:
                 reader = csv.reader(f)
+                first_row = True
                 for row in reader:
+                    if first_row == True:
+                        these_keys = row
+                        first_row = False
+                    else:
+                        print("Importing {}".format(row[1]))
+                        this_place = dict(zip(these_keys, row))
+                        found_it = Place.objects.filter(number=this_place['Store #'])
+                        print(found_it)
+                        if len(found_it) == 1:
+                            this_place_model = found_it[0]
+                        else:
+                            this_place_model = Place()
+                        if '-' in this_place['Zip']:
+                            the_zip = (this_place['Zip'].split("-"))[0]
+                        this_place_model.name = this_place['Store Name']
+                        this_place_model.number = str(this_place['Store #'])
+                        this_place_model.address_line1 = this_place['Address']
+                        this_place_model.city = this_place['City']
+                        this_place_model.state = this_place['St/Prov']
+                        this_place_model.zip = the_zip
+                        this_place_model.save()
                     print(row)
             #     if not csv_file.name.endswith('.csv'):
             #         messages.error(request,'File is not CSV type')
