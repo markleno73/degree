@@ -25,6 +25,15 @@
                 </table>
                 <input type="submit" value="Submit"/>
             </form>
+            {% if place_id %}
+            <form id="myform" method="post" action="{% url 'coreapps:place_form' %}">
+                {% csrf_token %}
+                <input type="hidden" name="task" value="delete">
+                <input type="hidden" name="place_id" value="{{ place_id }}">
+                <input type="submit" name="submit" value="Delete"/>
+                <a href="{{ link.urly }}" target="blank" class="lcars-white-color">{{ place }}</a>
+            </form>
+            {% endif %}
         {% endblock %}
         </div>
     {% endblock %}

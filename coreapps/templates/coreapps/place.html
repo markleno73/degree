@@ -10,8 +10,25 @@
                 <ul>
                     <li><a href="" class="lcars-white-color">{{ message }}</a></li>
                     {% for place in all_places %}
-                    <li><a href="/coreapps/place/{{ place.id }}/detail" class="lcars-white-color">
-                        {{ place.number|stringformat:"04d" }} - {{ place }}</a></li>
+                    <li>
+                        <form id="myform" method="post" action="{% url 'coreapps:place_form' %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="task" value="edit">
+                            <input type="hidden" name="place_id" value="{{ place.id }}">
+                            <input type="submit" name="submit" value="&Delta;" style="
+                                 background:none!important;
+                                 color:inherit;
+                                 border:none;
+                                 padding:0!important;
+                                 font: inherit;
+                                 /*border is optional*/
+                                 border-bottom:1px solid #444;
+                                 cursor: pointer;"/>
+                            <a href="/coreapps/place/{{ place.id }}/detail" target="blank" class="lcars-white-color">
+                                {{ place.number }} - {{ place.name }}
+                            </a>
+                        </form>
+                    </li>
                     {% endfor %}
                 </ul>
             {% else %}

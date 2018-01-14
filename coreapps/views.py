@@ -109,17 +109,34 @@ def places_import(request):
 
 
 def place_form(request):
-    output = "new place page"
+    output = "new place form"
+    all_places = Place.objects.all()
     # if this is a POST request we need to process the form data
     if request.method == 'POST':
         # create a form instance and populate it with the data from the request:
-        place_form_data = place_model_form(request.POST, request.FILES)
-        # check whether it's valid:
-        if place_form_data.is_valid():
-            # process the data in the form.cleaned_data as required.
-            # ...
-            place_form_data.save()
-            # examples are fun
+        print(request.POST)
+        if request.POST['task'] == 'delete':
+            this_place = Place.objects.get(pk=request.POST['place_id'])
+            this_place.delete()
+        elif request.POST['task'] == 'edit':
+            this_place = Place.objects.get(pk=request.POST['place_id'])
+            place_id = request.POST['place_id']
+            place_form_data = place_model_form(instance=this_place)
+            context = {
+                'message': output,
+                'place_form_data': place_form_data,
+                'place_id': place_id,
+                'all_places': all_places,
+            }
+            return render(request, 'coreapps/place_form.html', context)
+        else:
+            place_form_data = place_model_form(request.POST, request.FILES)
+            # check whether it's valid:
+            if place_form_data.is_valid():
+                # process the data in the form.cleaned_data as required.
+                # ...
+                place_form_data.save()
+                # examples are fun
                 # subject = form.cleaned_data['subject']
                 # message = form.cleaned_data['message']
                 # sender = form.cleaned_data['sender']
@@ -130,13 +147,14 @@ def place_form(request):
                 #     recipients.append(sender)
                 #
                 # send_mail(subject, message, sender, recipients)
-            # redirect to a new URL:
-            return HttpResponseRedirect('/coreapps/places/')
+                # redirect to a new URL:
+        return HttpResponseRedirect('/coreapps/places/')
     else:
         place_form_data = place_model_form()
     context = {
         'message': output,
         'place_form_data': place_form_data,
+        'all_places': all_places,
     }
     return render(request, 'coreapps/place_form.html', context)
 
