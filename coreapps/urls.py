@@ -53,6 +53,7 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^lifecycle/$', views.lifecycle_home, name='lifecycle_home'),
     url(r'^department/$', views.departments_home, name='departments_home'),
+    url(r'^departments_import/$', views.departments_import, name='departments_import'),
     url(r'^department_form/$', views.department_form, name='department_form'),
     url(r'^department/(?P<department_id>[0-9]+)/detail$', views.department_detail, name='department_detail'),
     url(r'^company/$', views.companies_home, name='companies_home'),

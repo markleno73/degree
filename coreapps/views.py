@@ -186,6 +186,81 @@ def departments_home(request):
     return render(request, 'coreapps/department.html', context)
 
 
+def departments_import(request):
+    output = "departments import page"
+    if request.method == 'POST':
+        departments_import_form_data = department_model_form(request.POST, request.FILES)
+        if departments_import_form_data.is_valid():
+            # process the data in the form.cleaned_data as required.
+            # redirecto to a new URL:
+            # return HttpResponseRedirect('/coreapps/departments/')
+            # try:
+            handle_uploaded_file(request.FILES["file_path"])
+            with open('upload.csv', 'r') as f:
+                reader = csv.reader(f)
+                first_row = True
+                for row in reader:
+                    if first_row == True:
+                        these_keys = row
+                        first_row = False
+                    else:
+                        print("Importing {}".format(row[1]))
+                        this_department = dict(zip(these_keys, row))
+                        found_it = Department.objects.filter(number=this_department['Store #'])
+                        print(found_it)
+                        if len(found_it) == 1:
+                            this_department_model = found_it[0]
+                        else:
+                            this_department_model = Department()
+                        if '-' in this_department['Zip']:
+                            the_zip = (this_department['Zip'].split("-"))[0]
+                        this_department_model.name = this_department['Store Name']
+                        this_department_model.number = str(this_department['Store #'])
+                        this_department_model.address_line1 = this_department['Address']
+                        this_department_model.city = this_department['City']
+                        this_department_model.state = this_department['St/Prov']
+                        this_department_model.zip = the_zip
+                        this_department_model.save()
+                    print(row)
+            #     if not csv_file.name.endswith('.csv'):
+            #         messages.error(request,'File is not CSV type')
+            #         return HttpResponseRedirect(reverse("myapp:upload_csv"))
+            #     # if file is to large, return
+            #     if csv_file.multiple_chunks():
+            #         messages.error(request,"Uploaded file is to big (%.2f MB)." % (csv_file.size/(1000*1000),))
+            #         return HttpResponseRedirect(reverse("myapp:upload_csv"))
+            #     file_data = csv_file.read().decode("utf-8")
+            #     lines = file_data.split("\n")
+            #     # loop over the lines and save them in the db. If error, store as string and then display
+            #     for line in lines:
+            #         fields = line.split(",")
+            #         data_dict = {}
+            #         data_dict["name"] = fields[0]
+            #         data_dict["start_date_time"] = fields[1]
+            #         data_dict["end_date_time"] = fields[1]
+            #         data_dict["notes"] = fields[1]
+            #         try:
+            #             form = EventsForm(data_dict)
+            #             if form.is_valid():
+            #                 form.save()
+            #             else:
+            #                 logging.getLogger("error_logger").error(form.errors.as_json())
+            #         except Exception as e:
+            #             logging.getLogger("error_logger").error(form.errors.as_json())
+            #             pass
+            # except Exception as e:
+            #     logging.getLogger("error_logger").error("Unable to upload file. "+repr(e))
+            #     messages.error(request, "Unable to upload file. "+repr(e))
+            # return HttpResponseRedirect(reverse("myapp:upload_csv"))
+    else:
+        departments_import_form_data = department_model_form()
+    context = {
+        'message': output,
+        'departments_import_form_data': departments_import_form_data,
+    }
+    return render(request, 'coreapps/department_import.html', context)
+
+
 def department_form(request):
     output = "new department page"
     # if this is a POST request we need to process the form data
