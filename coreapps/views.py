@@ -661,3 +661,82 @@ def group_detail(request, group_id):
     except Group.DoesNotExist:
         raise Http404("Group does not exist")
     return render(request, 'coreapps/group_detail.html', {'group': this_group})
+
+
+def person_home(request):
+    output = "these are the 'people' to know"
+    all_peoples = Person.objects.all()
+    print(all_peoples)
+    context = {
+        'message': output,
+        'all_peoples': all_peoples,
+    }
+    return render(request, 'coreapps/person.html', context)
+
+
+def person_form(request, person_id=None):
+    output = "new person page"
+    # if this is a POST request we need to process the form data
+    if request.method == 'POST':
+        if not person_id == None:
+            person = get_object_or_404(Person, pk=person_id)
+            person_form_data = person_model_form(instance=person)
+            # check whether it's valid:
+            if person_form_data.is_valid():
+                # process the data in the form.cleaned_data as required.
+                # ...
+                person.name = request.POST['name']
+                person.save()
+                # examples are fun
+                # subject = form.cleaned_data['subject']
+                # message = form.cleaned_data['message']
+                # sender = form.cleaned_data['sender']
+                # cc_myself = form.cleaned_data['cc_myself']
+                #
+                # recipients = ['info@example.com']
+                # if cc_myself:
+                #     recipients.append(sender)
+                #
+                # send_mail(subject, message, sender, recipients)
+                # redirect to a new URL:
+                return HttpResponseRedirect('/coreapps/people/')
+        else:
+            # create a form instance and populate it with the data from the request:
+            person_form_data = person_model_form(request.POST, request.FILES)
+            # check whether it's valid:
+            if person_form_data.is_valid():
+                # process the data in the form.cleaned_data as required.
+                # ...
+                person_form_data.save()
+                # examples are fun
+                # subject = form.cleaned_data['subject']
+                # message = form.cleaned_data['message']
+                # sender = form.cleaned_data['sender']
+                # cc_myself = form.cleaned_data['cc_myself']
+                #
+                # recipients = ['info@example.com']
+                # if cc_myself:
+                #     recipients.append(sender)
+                #
+                # send_mail(subject, message, sender, recipients)
+                # redirect to a new URL:
+                return HttpResponseRedirect('/coreapps/people/')
+    else:
+        if not person_id == None:
+            this_person = Person.objects.get(pk=person_id)
+            person_form_data = person_model_form(instance=this_person)
+        else:
+            person_form_data = person_model_form()
+    context = {
+        'message': output,
+        'person_form_data': person_form_data,
+    }
+    return render(request, 'coreapps/person_form.html', context)
+
+
+def person_detail(request, person_id):
+    try:
+        this_person = Person.objects.get(pk=person_id)
+    except Person.DoesNotExist:
+        raise Http404("Person does not exist")
+    return render(request, 'coreapps/person_detail.html', {'person': this_person})

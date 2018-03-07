@@ -79,4 +79,8 @@ urlpatterns = [
     url(r'^places_import/$', views.places_import, name='places_import'),
     url(r'^place_form/$', views.place_form, name='place_form'),
     url(r'^place/(?P<place_id>[0-9]+)/detail/$', views.place_detail, name='place_detail'),
+    url(r'^people/$', views.person_home, name='person_home'),
+    url(r'^person_form/$', views.person_form, name='person_form'),
+    url(r'^person_form/(?P<person_id>[0-9]+)$', views.person_form, name='person_form'),
+    url(r'^person/(?P<person_id>[0-9]+)/detail$', views.person_detail, name='person_detail'),
 ]

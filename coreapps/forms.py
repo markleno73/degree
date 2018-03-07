@@ -73,6 +73,14 @@ class company_model_form(ModelForm):
 class department_model_form(ModelForm):
     class Meta:
         model = Department
-        fields = ['name','place']
+        fields = '__all__'
             # fields = '__all__'
             # exclude = ['title']
+
+
+class person_model_form(ModelForm):
+    class Meta:
+        model = Person
+        fields = '__all__'
+        # fields = '__all__'
+        # exclude = ['title']
