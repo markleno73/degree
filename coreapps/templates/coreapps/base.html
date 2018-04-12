@@ -5,12 +5,53 @@
 <head>
   <meta charset="UTF-8">
   <title>LCARS</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'coreapps/css/lcars.css' %}" />
-  <style>
-  html, body { background: black }
-  </style>
+    <!--<link rel="stylesheet" type="text/css" href="{% static 'coreapps/css/lcars.css' %}" />-->
+    <link rel="stylesheet" type="text/css" href="{% static 'coreapps/css/superhero.bootstrap.css' %}"/>
+    <!--<style>html, body { background: black }</style>-->
+    <script type="text/javascript" async="" src="./Bootswatch_ Superhero_files/ga.js.download"></script>
 </head>
 <body>
+<div class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+    <div class="container">
+        <a href="{% url 'coreapps:index' %}" class="navbar-brand">LENOS</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Reports<span
+                        class="caret"></span></a>
+                <div class="dropdown-menu" aria-labelledby="reports">
+                    <a class="dropdown-item" href="#">Default</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Yeti</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Help</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Blog</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="https://bootswatch.com/superhero/?#"
+                   id="download">Superhero <span class="caret"></span></a>
+                <div class="dropdown-menu" aria-labelledby="download">
+                    <a class="dropdown-item" href="https://jsfiddle.net/bootswatch/9n4nxnqy/">Open in JSFiddle</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="https://bootswatch.com/4/superhero/bootstrap.min.css">bootstrap.min.css</a>
+                    <a class="dropdown-item" href="./Bootswatch_ Superhero_files/bootstrap.css">bootstrap.css</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item"
+                       href="https://bootswatch.com/4/superhero/_variables.scss">_variables.scss</a>
+                    <a class="dropdown-item"
+                       href="https://bootswatch.com/4/superhero/_bootswatch.scss">_bootswatch.scss</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
 
   <div class="lcars-container">
 
@@ -35,7 +76,6 @@
             </a>
           </div>
           <div class="lcars-column u-1-2">
-            <h1 class="right">LENOS</h1>
             {% if user.is_authenticated %}
               <small><a href="{% url 'logout' %}"><font color="white">logout</font></a></small>
             {% else %}
@@ -53,7 +93,7 @@
     </div>
 
     <div class="lcars-row">
-
+        https://bootswatch.com/superhero/
       <!-- LEFT MENU
       =========================================================== -->
       <div class="lcars-column u-1-8">
