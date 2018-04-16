@@ -57,8 +57,8 @@ class kb_model_form(ModelForm):
 class thing_model_form(ModelForm):
     class Meta:
         model = Thing
-        fields = ['name','model_num']
-            # fields = '__all__'
+        # fields = ['name','model_num']
+        fields = '__all__'
             # exclude = ['title']
 
 
@@ -73,9 +73,11 @@ class company_model_form(ModelForm):
 class department_model_form(ModelForm):
     class Meta:
         model = Department
-        fields = '__all__'
-            # fields = '__all__'
-            # exclude = ['title']
+        fields = ['name', 'place']
+
+    def __init__(self, *args, **kwargs):
+        super(department_model_form, self).__init__(*args, **kwargs)
+        self.fields['place'].queryset = Place.objects.order_by('number')
 
 
 class person_model_form(ModelForm):

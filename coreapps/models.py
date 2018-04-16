@@ -15,6 +15,16 @@ class Place(models.Model):
     zip = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
+        return "%s - %s" % (self.number, self.name)
+
+
+# company
+class Company(models.Model):
+    name = models.CharField(max_length=200)
+
+    # should be many to many with Place
+
+    def __str__(self):
         return self.name
 
 
@@ -22,16 +32,8 @@ class Place(models.Model):
 class Department(models.Model):
     name = models.CharField(max_length=200)
     place = models.ForeignKey(Place, on_delete=models.CASCADE)
+    company = models.ForeignKey(Company, on_delete=models.CASCADE)
     # should be many to many with companies and Place
-
-    def __str__(self):
-        return self.name
-
-
-# company
-class Company(models.Model):
-    name = models.CharField(max_length=200)
-    # should be many to many with Place
 
     def __str__(self):
         return self.name
@@ -52,15 +54,6 @@ class Person(models.Model):
 class ModelNumber(models.Model):
     name = models.CharField(max_length=200)
     company = models.ForeignKey(Place, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.name
-
-
-# things
-class Thing(models.Model):
-    name = models.CharField(max_length=200)
-    model_num = models.CharField(max_length=200)
 
     def __str__(self):
         return self.name
@@ -97,6 +90,18 @@ class Linker(models.Model):
 
 class Group(models.Model):
     name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
+# things
+class Thing(models.Model):
+    name = models.CharField(max_length=200)
+    model_num = models.CharField(max_length=200)
+    place = models.ForeignKey(Place, on_delete=models.CASCADE, default=None)
+    group = models.ForeignKey(Group, on_delete=models.CASCADE, default=None)
+    person = models.ForeignKey(Person, on_delete=models.CASCADE, default=None)
 
     def __str__(self):
         return self.name

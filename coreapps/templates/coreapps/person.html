@@ -1,40 +1,29 @@
 {% extends 'coreapps/base.html' %}
 
+{% block left %}
+<div class="bs-component">
+    <div class="btn-group-vertical">
+        <button type="button" class="btn btn-primary"><a href="{% url 'coreapps:person_form' %}"><p class="text-white">
+            new</p></a></button>
+        <button type="button" class="btn btn-primary"><a href="{% url 'coreapps:person_form' %}"><p class="text-white">
+            import</p></a></button>
+    </div>
+</div>
+{% endblock %}
+
 {% block center %}
 <div class="lcars-row">
     {% block center-row %}
-    <div class="lcars-column u-1-2">
-        {% block center-row-1-2 %}
-        <a href="#" class="lcars-button radius">-</a>
-        {% if message %}
-        <ul>
-            <li><a href="" class="lcars-white-color">{{ message }}</a></li>
+    {% if message %} {{ message }} {% endif %}
+    {% if all_peoples %}
             {% for person in all_peoples %}
-            <li><a href="/coreapps/person_form/{{ person.id }}" class="lcars-white-color">&Delta;</a>
-                <a href="/coreapps/person/{{ person.id }}/detail" class="lcars-white-color">{{ person }}</a></li>
-            <li>
-                {% endfor %}
-        </ul>
-        {% else %}
-        <p>No persons are available.</p>
+    <br/><a href="/coreapps/person_form/{{ person.id }}" class="lcars-white-color">&Delta;</a>
+    <a href="/coreapps/person/{{ person.id }}/detail" class="lcars-white-color">{{ person }}</a>
+    {% endfor %}
         {% endif %}
-        {% endblock %}
-    </div>
-    <div class="lcars-column u-1-2">
-        {% block center-row-2-2 %}
-        <a href="#" class="lcars-button radius">-</a>
-        {% endblock %}
-    </div>
     {% endblock %}
 </div>
 {% endblock %}
 
 {% block right %}
-<ul class="lcars-menu right">
-    <li class="lcars-tan-bg"><a href="{% url 'coreapps:person_form' %}">new</a></li>
-    <li class="lcars-tan-bg tall large-gap"></li>
-    <li class="lcars-blue-bg"></li>
-    <li class="lcars-blue-bg tall"></li>
-    <li class="lcars-blue-bg"></li>
-</ul>
 {% endblock %}

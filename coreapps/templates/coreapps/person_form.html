@@ -1,23 +1,11 @@
 {% extends 'coreapps/person.html' %}
 
 {% block center %}
-<div class="lcars-row">
+<div class="row">
     {% block center-row %}
-    <div class="lcars-column u-1-2">
-        {% block center-row-1-2 %}
-        <a href="#" class="lcars-button radius">-</a>
-        {% endblock %}
-        {% if message %}
-        <ul>
-            <li><a href="" class="lcars-color white">{{ message }}</a></li>
-        </ul>
-        {% else %}
-        <p>No people are available.</p>
-        {% endif %}
-    </div>
-    <div class="lcars-column u-1-2">
-        {% block center-row-2-2 %}
-        <a href="#" class="lcars-button radius">Enter the details of the new person</a>
+    <div class="col-6">
+        {% if message %} {{ message }} {% endif %}
+        <br/><a href="#" class="lcars-button radius">Enter the details of the new person</a>
         <form action="/coreapps/person_form/" method="post" enctype="multipart/form-data">
             <table>
                 {% csrf_token %}
@@ -25,7 +13,6 @@
             </table>
             <input type="submit" value="Submit"/>
         </form>
-        {% endblock %}
     </div>
     {% endblock %}
 </div>
